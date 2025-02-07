@@ -17,23 +17,23 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") $ | sha256sum }}
         {{- if .podAnnotations }}
-        {{- toYaml .podAnnotations | nindent 8 }}
+        {{- .podAnnotations | toYaml | nindent 8 }}
         {{- end }}
       labels:
         {{- include "homepage.labels" $ | nindent 8 }}
         {{- if .podLabels }}
-        {{- toYaml .podLabels | nindent 8 }}
+        {{- .podLabels | toYaml | nindent 8 }}
         {{- end }}
     spec:
       imagePullSecrets:
-        {{- toYaml .imagePullSecrets | nindent 8 }}
+        {{- .imagePullSecrets | toYaml | nindent 8 }}
       serviceAccountName: {{ include "homepage.serviceAccountName" $ }}
       securityContext:
-        {{- toYaml .podSecurityContext | nindent 8 }}
+        {{- .podSecurityContext | toYaml | nindent 8 }}
       containers:
         - name: {{ $.Chart.Name }}
           securityContext:
-            {{- toYaml .securityContext | nindent 12 }}
+            {{- .securityContext | toYaml | nindent 12 }}
           {{- with  .image }}
           image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
           imagePullPolicy: {{ .pullPolicy }}
@@ -43,11 +43,11 @@ spec:
               containerPort: {{ .service.port }}
               protocol: TCP
           livenessProbe:
-            {{- toYaml .livenessProbe | nindent 12 }}
+            {{- .livenessProbe | toYaml | nindent 12 }}
           readinessProbe:
-            {{- toYaml .readinessProbe | nindent 12 }}
+            {{- .readinessProbe | toYaml | nindent 12 }}
           resources:
-            {{- toYaml .resources | nindent 12 }}
+            {{- .resources | toYaml | nindent 12 }}
           volumeMounts:
             - mountPath: /app/config/custom.js
               name: homepage-config
@@ -76,7 +76,7 @@ spec:
             - mountPath: /app/config/logs
               name: logs
             {{- if .extraVolumeMounts }}
-            {{- toYaml .extraVolumeMounts | nindent 12 }}
+            {{- .extraVolumeMounts | toYaml | nindent 12 }}
             {{- end }}
       volumes:
         - name: homepage-config
@@ -85,12 +85,12 @@ spec:
         - name: logs
           emptyDir: {}
         {{- if .extraVolumes }}
-        {{- toYaml .extraVolumes | nindent 8 }}
+        {{- .extraVolumes | toYaml | nindent 8 }}
         {{- end }}
       nodeSelector:
-        {{- toYaml .nodeSelector | nindent 8 }}
+        {{- .nodeSelector | toYaml | nindent 8 }}
       affinity:
-        {{- toYaml .affinity | nindent 8 }}
+        {{- .affinity | toYaml | nindent 8 }}
       tolerations:
-        {{- toYaml .tolerations | nindent 8 }}
+        {{- .tolerations | toYaml | nindent 8 }}
 {{- end }}

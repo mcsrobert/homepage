@@ -5,4 +5,4 @@ metadata:
   labels:
     {{- include "homepage.labels" . | nindent 4 }}
 data:
-  {{- toYaml .Values.config | nindent 2 }}
+  {{- .Values.config | toYaml | nindent 2 }}
