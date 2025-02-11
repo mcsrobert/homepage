@@ -80,8 +80,8 @@ spec:
             {{- end }}
       volumes:
         - name: homepage-config
-          configMap:
-            name: homepage-config
+          secret:
+            secretName: homepage-config
         - name: logs
           emptyDir: {}
         {{- if .extraVolumes }}
