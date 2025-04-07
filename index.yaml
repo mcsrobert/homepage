@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   homepage:
   - apiVersion: v2
+    appVersion: v1.1.1
+    created: "2025-04-07T09:09:17.619725694Z"
+    description: A Helm chart to deploy Homepage
+    digest: 38ed584da638e23658a959bada8efb14e867a9f7015fd1312f3a35219e6824b5
+    name: homepage
+    type: application
+    urls:
+    - https://github.com/mcsrobert/homepage/releases/download/v0.2.0/homepage-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: v0.10.9
     created: "2025-02-12T12:53:40.583257269Z"
     description: A Helm chart to deploy Homepage
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/mcsrobert/homepage/releases/download/v0.1.1/homepage-0.1.1.tgz
     version: 0.1.1
-generated: "2025-02-12T12:53:40.583337458Z"
+generated: "2025-04-07T09:09:17.619763154Z"
