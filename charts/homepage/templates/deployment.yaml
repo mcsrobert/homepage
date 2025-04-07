@@ -38,6 +38,16 @@ spec:
           image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
           imagePullPolicy: {{ .pullPolicy }}
           {{- end }}
+          {{- if .ingress.enabled }}
+          env:
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: |-
+                {{- $hosts := list }}
+                {{- range .ingress.hosts }}
+                  {{- $hosts = append $hosts .host }}
+                {{- end }}
+                {{ join "," $hosts }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .service.port }}
