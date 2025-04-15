@@ -1,0 +1,22 @@
+{
+    "extends": ["config:recommended"],
+    "baseBranches": ["dev"],
+    "dependencyDashboard": false,
+    "prCreation": "immediate",
+    "ignorePaths": ["**/examples/**"],
+    "packageRules": [
+        {
+            "matchDatasources": ["helm-values", "regex"],
+            "automerge": true
+        }
+    ],
+    "customManagers": [
+      {
+        "customType": "regex",
+        "fileMatch": ["^charts/homepage/Chart\\.yaml$"],
+        "matchStrings": ["appVersion:\\s*\"(?<currentValue>.*?)\""],
+        "depNameTemplate": "ghcr.io/gethomepage/homepage",
+        "datasourceTemplate": "docker"
+      }
+    ]
+}
